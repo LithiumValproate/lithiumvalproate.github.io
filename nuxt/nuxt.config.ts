@@ -1,3 +1,4 @@
 export default defineNuxtConfig({
-  // 这里可以配置你的 Nuxt 项目
+  compatibilityDate: "2025-04-14",
+  modules: ["@nuxtjs/tailwindcss"]
 })
