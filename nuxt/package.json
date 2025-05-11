@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "deploy": "pnpm run generate && gh-pages -d .output/public -b gh-pages -t true"
+    "deploy": "pnpm generate && gh-pages -d .output/public -b gh-pages -t true"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "6.13.2",
