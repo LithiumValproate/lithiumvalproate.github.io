@@ -57,58 +57,86 @@
 </template>
 
 <script setup>
-const posts = [
+const rawPosts = [
   {
-    id: 1,
+    title: '皐月初末',
+    date: '2025-05-06',
+    summary: '在哭',
+    category: 'article',
+  },
+  {
+    title: '神中metaphor',
+    date: '2025-04-30',
+    summary: '看懂的也是神人了',
+    category: 'article',
+  },
+  {
+    title: 'Kon-KR #4.5',
+    date: '2025-04-22',
+    summary: '<UNK>',
+    category: 'article',
+  },
+  {
+    title: 'Kon-KR #4',
+    date: '2025-04-20',
+    summary: '<UNK>',
+    category: 'article',
+  },
+  {
+    title: 'Kon-KR #3',
+    date: '2025-04-18',
+    summary: '<UNK>',
+    category: 'article',
+  },
+  {
+    title: '卯月望',
+    date: '2025-04-15',
+    summary: '<UNK>',
+    category: 'article',
+  },
+  {
     title: '听Duvet，我想到了什么',
     date: '2025-04-14',
     summary: '我们活着是为了什么，追求什么呢？',
     category: 'article',
   },
   {
-    id: 2,
-    title: '心 #2',
+    title: 'Kon-KR #2',
     date: '2025-04-13',
     summary: '漫步',
     category: 'article',
   },
   {
-    id: 3,
-    title: '412夜',
+    title: '四月十',
     date: '2025-04-12',
     summary: '回忆数摇',
     category: 'article',
   },
   {
-    id: 4,
     title: 'CS-59头等 #4',
     date: '2025-04-11',
     summary: '很低级的一局',
     category: 'game',
   },
   {
-    id: 5,
     title: 'CS-59头等 #3',
     date: '2025-04-11',
     summary: '六杀',
     category: 'game',
   },
   {
-    id: 6,
     title: 'CS-59头等 #2',
     date: '2025-04-11',
     summary: '十级房那咋了',
     category: 'game',
   },
   {
-    id: 7,
-    title: '心 #1',
+    title: 'Kon-KR #1',
     date: '2025-04-11',
     summary: '序幕',
     category: 'article',
   },
   {
-    id: 8,
     title: 'CS-59头等 #1',
     date: '2025-04-10',
     summary: '哪边天命少哪边赢',
@@ -116,9 +144,20 @@ const posts = [
   },
 ]
 
+const posts = rawPosts
+  .slice()
+  .sort((a, b) => new Date(b.date) - new Date(a.date))
+  .map((post, index) => ({
+    ...post,
+    id: index + 1
+  }))
+
 const postPairs = []
+
 for (let i = 0; i < posts.length; i += 2) {
-  postPairs.push([posts[i], posts[i + 1]])
+  const pair = [posts[i]]
+  if (posts[i + 1]) pair.push(posts[i + 1])
+  postPairs.push(pair)
 }
 </script>
 
