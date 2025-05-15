@@ -144,13 +144,13 @@ const rawPosts = [
   },
 ]
 
-const posts = rawPosts
+const posts = computed(() => rawPosts
   .slice()
   .sort((a, b) => new Date(b.date) - new Date(a.date))
   .map((post, index) => ({
     ...post,
     id: index + 1
-  }))
+  })))
 
 const postPairs = []
 
