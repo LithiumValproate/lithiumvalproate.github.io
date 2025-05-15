@@ -53,7 +53,7 @@
         "../node_modules/.pnpm/@unhead+vue@2.0.5_vue@3.5.13/node_modules/@unhead/vue"
       ],
       "@nuxt/devtools": [
-        "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools"
+        "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_lightningcss@1.29.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools"
       ],
       "vue": [
         "../node_modules/.pnpm/vue@3.5.13/node_modules/vue"
@@ -77,10 +77,10 @@
         "../node_modules/.pnpm/@nuxt+schema@3.16.2/node_modules/@nuxt/schema"
       ],
       "nuxt": [
-        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_magicast@0.3.5_rollup@4.40.0__cb76c59551638f3e97ed2870735c7154/node_modules/nuxt"
+        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_lightningcss@1.29.2_magicast@_d832bd391ebeabb39965fa61b52e946e/node_modules/nuxt"
       ],
       "vite/client": [
-        "../node_modules/.pnpm/vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1/node_modules/vite/client"
+        "../node_modules/.pnpm/vite@6.2.6_jiti@2.4.2_lightningcss@1.29.2_terser@5.39.0_yaml@2.7.1/node_modules/vite/client"
       ],
       "#shared": [
         "../shared"
@@ -101,10 +101,10 @@
         "./*"
       ],
       "#internal/nuxt/paths": [
-        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_magicast@0.3.5_rollup@4.40.0__cb76c59551638f3e97ed2870735c7154/node_modules/nuxt/dist/core/runtime/nitro/utils/paths"
+        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_lightningcss@1.29.2_magicast@_d832bd391ebeabb39965fa61b52e946e/node_modules/nuxt/dist/core/runtime/nitro/utils/paths"
       ],
       "#unhead/composables": [
-        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_magicast@0.3.5_rollup@4.40.0__cb76c59551638f3e97ed2870735c7154/node_modules/nuxt/dist/head/runtime/composables/v3"
+        "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_lightningcss@1.29.2_magicast@_d832bd391ebeabb39965fa61b52e946e/node_modules/nuxt/dist/head/runtime/composables/v3"
       ]
     },
     "lib": [
@@ -115,7 +115,7 @@
   },
   "include": [
     "./types/nitro-nuxt.d.ts",
-    "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/runtime/server",
+    "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_lightningcss@1.29.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.3.5/node_modules/@nuxt/telemetry/runtime/server",
     "./types/nitro.d.ts",
     "../**/*",
@@ -123,9 +123,8 @@
   ],
   "exclude": [
     "../node_modules",
-    "../../node_modules",
-    "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_magicast@0.3.5_rollup@4.40.0__cb76c59551638f3e97ed2870735c7154/node_modules/nuxt/node_modules",
-    "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/node_modules",
+    "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_lightningcss@1.29.2_magicast@_d832bd391ebeabb39965fa61b52e946e/node_modules/nuxt/node_modules",
+    "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_lightningcss@1.29.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/node_modules",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.3.5/node_modules/@nuxt/telemetry/node_modules",
     "../dist"
   ]

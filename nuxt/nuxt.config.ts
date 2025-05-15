@@ -1,13 +1,18 @@
 export default defineNuxtConfig({
   ssr: false,
+
   app: {
-    baseURL: '/',
+      baseURL: '/',
   },
+
   nitro: {
-    preset: 'static',
-    prerender: {
-      outputDir: 'dist',
-    },
+      preset: 'static',
+      prerender: {
+          outputDir: 'dist',
+      },
   },
+
   target: 'static',
+  compatibilityDate: '2025-05-15',
+  modules: ['@nuxtjs/tailwindcss'],
 })

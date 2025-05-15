@@ -4,16 +4,16 @@
     <!-- 顶部导航栏 -->
     <header class="flex items-center justify-between px-6 py-4 border-b relative">
       <!-- 左侧 Slogan -->
-      <div class="text-lg font-semibold" style="color: ghostwhite">琉璃雨</div>
+      <div class="text-lg font-semibold text-[ghostwhite]">琉璃雨</div>
 
       <!-- 中间菜单按钮和链接 -->
       <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-6">
         <transition name="slide-fade-left">
-          <NuxtLink v-if="showMenu" to="/archive" class="text-base hover:underline" style="color: ghostwhite">全部内容
+          <NuxtLink v-if="showMenu" to="/archive" class="text-base hover:underline text-[ghostwhite]">全部内容
           </NuxtLink>
         </transition>
 
-        <button @click="toggleMenu" class="w-8 h-8 relative flex items-center justify-center" style="color: ghostwhite">
+        <button @click="toggleMenu" class="w-8 h-8 relative flex items-center justify-center">
           <span :class="[
             'absolute h-0.5 w-6 bg-[ghostwhite] transition-transform duration-300',
             showMenu ? 'rotate-45' : '-translate-y-2'
@@ -37,7 +37,7 @@
         </button>
 
         <transition name="slide-fade-right">
-          <NuxtLink v-if="showMenu" to="/about" class="text-base hover:underline" style="color: ghostwhite">关于本站
+          <NuxtLink v-if="showMenu" to="/about" class="text-base hover:underline text-[ghostwhite]">关于本站
           </NuxtLink>
         </transition>
       </div>
@@ -53,7 +53,7 @@
 
     <!-- 页面内容 -->
     <main class="flex-grow">
-      <NuxtPage/>
+      <NuxtPage />
     </main>
 
     <!-- 页脚 -->
@@ -106,4 +106,3 @@ function toggleMenu() {
   transform: translateY(-0.5rem);
 }
 </style>
-  

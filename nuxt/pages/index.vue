@@ -144,19 +144,21 @@ const rawPosts = [
   },
 ]
 
-const posts = computed(() => rawPosts
-  .slice()
-  .sort((a, b) => new Date(b.date) - new Date(a.date))
-  .map((post, index) => ({
-    ...post,
-    id: index + 1
-  })))
+const posts = computed(() =>
+  rawPosts
+    .slice()
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map((post, index) => ({
+      ...post,
+      id: index + 1
+    }))
+)
 
 const postPairs = []
 
-for (let i = 0; i < posts.length; i += 2) {
-  const pair = [posts[i]]
-  if (posts[i + 1]) pair.push(posts[i + 1])
+for (let i = 0; i < posts.value.length; i += 2) {
+  const pair = [posts.value[i]]
+  if (posts.value[i + 1]) pair.push(posts.value[i + 1])
   postPairs.push(pair)
 }
 </script>
