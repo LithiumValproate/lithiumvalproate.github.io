@@ -111,7 +111,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/2e10dcb1-21ee-40b9-a3dd-9e2cf2f78703.json"
+        "./manifest/meta/0542e7cc-b04a-48e5-b48b-57bafb6fbe56.json"
       ],
       "#components": [
         "./components"
@@ -155,8 +155,6 @@
     "./nuxt.d.ts",
     "../.config/nuxt.*",
     "../**/*",
-    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.13.2_magicast@0.3.5/node_modules/@nuxtjs/tailwindcss/runtime",
-    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.13.2_magicast@0.3.5/node_modules/@nuxtjs/tailwindcss/dist/runtime",
     "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/runtime",
     "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/dist/runtime",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.3.5/node_modules/@nuxt/telemetry/runtime",
@@ -168,11 +166,8 @@
     "../node_modules",
     "../../node_modules",
     "../node_modules/.pnpm/nuxt@3.16.2_@parcel+watcher@2.5.1_db0@0.3.1_ioredis@5.6.1_magicast@0.3.5_rollup@4.40.0__cb76c59551638f3e97ed2870735c7154/node_modules/nuxt/node_modules",
-    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.13.2_magicast@0.3.5/node_modules/@nuxtjs/tailwindcss/node_modules",
     "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/node_modules",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.3.5/node_modules/@nuxt/telemetry/node_modules",
-    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.13.2_magicast@0.3.5/node_modules/@nuxtjs/tailwindcss/runtime/server",
-    "../node_modules/.pnpm/@nuxtjs+tailwindcss@6.13.2_magicast@0.3.5/node_modules/@nuxtjs/tailwindcss/dist/runtime/server",
     "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/.pnpm/@nuxt+devtools@2.4.0_vite@6.2.6_jiti@2.4.2_terser@5.39.0_yaml@2.7.1__vue@3.5.13/node_modules/@nuxt/devtools/dist/runtime/server",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.3.5/node_modules/@nuxt/telemetry/runtime/server",
