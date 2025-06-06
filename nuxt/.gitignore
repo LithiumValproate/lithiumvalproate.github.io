@@ -19,6 +19,6 @@ logs
 .idea
 
 # Local env files
-notion/.env
+.env
 .env.*
 !.env.example

@@ -1,11 +1,11 @@
 <template>
   <body>
   <!-- 添加加载和错误状态的UI提示 -->
-  <div v-if="pending" class="status-message">
+  <div v-if="pPending" class="status-message">
     正在从 Notion 加载文章...
   </div>
-  <div v-else-if="error" class="status-message error">
-    加载失败: {{ error.message }} <br/>
+  <div v-else-if="pError" class="status-message error">
+    加载失败: {{ pError.message }} <br/>
     请确保你的后端服务正在运行，并且Notion中有已批准(Approved)的条目。
   </div>
 
@@ -39,7 +39,31 @@
       </div>
       <div class="comment-board">
         <!-- 评论板内容 -->
-        <p class="text-gray-500">评论区</p>
+        <!-- 添加加载和错误状态的UI提示 -->
+        <div v-if="cPending" class="status-message">
+          正在从 Notion 加载文章...
+        </div>
+        <div v-else-if="cError" class="status-message error">
+          加载失败: {{ cError.message }} <br/>
+          请确保你的后端服务正在运行，并且Notion中有已批准(Approved)的条目。
+        </div>
+        <div v-else-if="!comments || comments.length === 0" class="status-box">
+          <p>还没有人评论，快来抢占第一个沙发吧！</p>
+        </div>
+        <ul v-else class="comment-list">
+          <li v-for="comment in comments" :key="comment.id" class="comment-item">
+            <div class="comment-avatar">
+              <span>{{ comment.username.charAt(0).toUpperCase() }}</span>
+            </div>
+            <div class="comment-content">
+              <div class="comment-header">
+                <strong class="comment-username">{{ comment.username }}</strong>
+                <span class="comment-date">{{ comment.date }}</span>
+              </div>
+              <p class="comment-text">{{ comment.content }}</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -47,11 +71,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import {computed} from 'vue';
 
 // 1. 从你的后端API获取数据
 // data 会被自动推断为一个 Ref
-const { data: fetchedPosts, pending, error } = await useFetch('http://localhost:3000/comments', {
+const {data: fetchedPosts, pending: pPending, error: pError} = await useFetch('http://localhost:3000/article', {
   lazy: true, // 异步加载，不阻塞页面渲染
   default: () => [] // 提供默认空数组，防止错误
 });
@@ -75,9 +99,9 @@ const posts = computed(() => {
   }
   return fetchedPosts.value.map(post => ({
     id: post.id,
-    title: post.username, // 将 Notion 中的 'Username' 映射为 'title'
+    title: post.title, // 将 Notion 中的 'Username' 映射为 'title'
     date: formatDate(post.date), // 格式化日期
-    summary: post.content, // 将 Notion 中的 'Content' 映射为 'summary'
+    summary: post.summary, // 将 Notion 中的 'Content' 映射为 'summary'
     category: 'article', // 可以保留或根据需要修改
   }));
 });
@@ -99,6 +123,42 @@ const postPairs = computed(() => {
   }
   return pairs;
 });
+
+// 1. 从 /comments API 获取原始评论数据
+// 我们不仅获取数据，还获取加载状态(pending)和错误状态(error)
+// 为了避免和文章获取的变量冲突，我们给它们加上 'Comments' 后缀
+const {
+  data: fetchedComments,
+  pending: cPending,
+  error: cError
+} = await useFetch('http://localhost:3000/comments', {
+  lazy: true,      // 异步加载，不阻塞页面渲染
+  default: () => [] // 提供默认空数组，防止初始渲染时出错
+});
+
+// 2. 创建一个计算属性，用于处理和格式化获取到的评论数据
+// 当 fetchedComments 发生变化时，这个 'comments' 数组会自动更新
+const comments = computed(() => {
+  // 确保我们处理的是一个数组
+  if (!Array.isArray(fetchedComments.value)) {
+    return [];
+  }
+
+  // 使用 .map 遍历每一条原始评论，并将其转换为我们需要的格式
+  return fetchedComments.value.map(comment => {
+    // 这里使用了可选链(?.)和空值合并(||)操作符
+    // 即使 Notion 里的某些单元格是空的，代码也不会崩溃
+    return {
+      id: comment.id,
+      username: comment.username || '匿名用户', // 如果没有用户名，显示默认值
+      content: comment.content || '该用户没有留下任何内容。', // 如果没有内容，显示默认值
+      date: formatDate(comment.date), // 格式化日期
+    };
+  });
+});
+
+// 现在，你可以在你的 <template> 中直接使用 'comments', 'commentsPending', 和 'commentsError' 了
+// 例如，你可以用 v-for="comment in comments" 来展示评论列表
 
 </script>
 
@@ -130,7 +190,6 @@ const postPairs = computed(() => {
 }
 
 .article-block {
-  min-height: 10em; /* 使用 min-height 保证最小高度 */
   padding: 1.5rem;
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -138,8 +197,9 @@ const postPairs = computed(() => {
   background: linear-gradient(145deg, #367cff, #2a63cc);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  max-height: 8em;
+  overflow: hidden;
 }
 
 .article-block:hover {
@@ -156,13 +216,15 @@ const postPairs = computed(() => {
 }
 
 .post-title {
+  margin-top: 0;
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .post-date {
   font-size: 0.8rem;
+  margin-top: 0.3em;
   margin-bottom: 0.5rem;
   text-align: right;
   opacity: 0.8;
@@ -171,7 +233,6 @@ const postPairs = computed(() => {
 .post-summary {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  flex-grow: 1; /* 让摘要区域填充剩余空间 */
 }
 
 .multi-column {
@@ -187,7 +248,7 @@ const postPairs = computed(() => {
   min-height: 200px;
   background: #fff;
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,6 +267,7 @@ const postPairs = computed(() => {
   font-size: 1.2rem;
   color: #6b7280;
 }
+
 .status-message.error {
   color: #ef4444;
   background-color: #fef2f2;
