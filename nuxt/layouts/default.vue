@@ -53,6 +53,8 @@ function toggleMenu() {
 </script>
 
 <style scoped>
+@import '~/assets/css/main.css';
+
 .header {
   display: flex;
   align-items: center;
