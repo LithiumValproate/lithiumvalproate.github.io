@@ -9,12 +9,12 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const notion = new Client({auth: process.env.NOTION_KEY});
-const commentsId = process.env.NOTION_COMMENT;
+const commentsId = process.env.NOTION_COMMENTS;
 const articleDatabaseId = process.env.NOTION_ARTICLE;
 
 // 检查所有必要的环境变量是否已设置
-if (!process.env.NOTION_KEY || !process.env.NOTION_COMMENT || !process.env.NOTION_ARTICLE) {
-    console.error('错误: 请确保在你的 .env 文件中设置了 NOTION_KEY, NOTION_COMMENT, 和 NOTION_ARTICLE。');
+if (!process.env.NOTION_KEY || !process.env.NOTION_COMMENTS || !process.env.NOTION_ARTICLE) {
+    console.error('错误: 请确保在你的 .env 文件中设置了 NOTION_KEY, NOTION_COMMENTS, 和 NOTION_ARTICLE。');
     process.exit(1); // 带着错误码退出进程
 }
 
@@ -27,7 +27,7 @@ const COMMENT_STATUS = {
 // --- 获取文章内容的路由 ---
 app.get('/article', async (req, res) => {
     if (!articleDatabaseId) {
-        return res.status(500).json({ message: '服务器未配置文章数据库ID (NOTION_ARTICLE_DB_ID)。' });
+        return res.status(500).json({message: '服务器未配置文章数据库ID (NOTION_ARTICLE_DB_ID)。'});
     }
 
     try {
@@ -79,7 +79,7 @@ app.get('/article', async (req, res) => {
 
     } catch (err) {
         console.error('获取文章列表时出错:', err);
-        res.status(500).json({ message: '获取文章列表失败。' });
+        res.status(500).json({message: '获取文章列表失败。'});
     }
 });
 
