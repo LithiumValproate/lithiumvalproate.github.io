@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "generate": "nuxt generate && cd dist && touch .nojekyll && echo MATSU.RIP > CNAME",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

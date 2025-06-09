@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <div class="logo">琉璃雨</div>
+    <NuxtLink to="/" class="logo">
+      <div class="logo-text">琉璃雨</div>
+    </NuxtLink>
 
     <nav class="nav">
       <transition name="fade">
@@ -64,8 +66,18 @@ function toggleMenu() {
 }
 
 .logo {
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: underline;
+  color: ghostwhite;
+}
+
+.logo .logo-text {
   font-size: 20px;
   font-weight: bold;
+  color: ghostwhite;
 }
 
 .nav {

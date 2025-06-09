@@ -11,10 +11,11 @@ app.use(bodyParser.json());
 const notion = new Client({auth: process.env.NOTION_KEY});
 const commentsId = process.env.NOTION_COMMENTS;
 const articleDatabaseId = process.env.NOTION_ARTICLE;
+const articleArchiveId = process.env.NOTION_ARCHIVE;
 
 // 检查所有必要的环境变量是否已设置
-if (!process.env.NOTION_KEY || !process.env.NOTION_COMMENTS || !process.env.NOTION_ARTICLE) {
-    console.error('错误: 请确保在你的 .env 文件中设置了 NOTION_KEY, NOTION_COMMENTS, 和 NOTION_ARTICLE。');
+if (!process.env.NOTION_KEY || !process.env.NOTION_COMMENTS || !process.env.NOTION_ARTICLE || !process.env.NOTION_ARCHIVE) {
+    console.error('错误: 请确保在你的 .env 文件中设置了 NOTION_KEY, NOTION_COMMENTS, NOTION_ARTICLE 和 NOTION_ARCHIVE。');
     process.exit(1); // 带着错误码退出进程
 }
 
@@ -27,14 +28,14 @@ const COMMENT_STATUS = {
 // --- 获取文章内容的路由 ---
 app.get('/article', async (req, res) => {
     if (!articleDatabaseId) {
-        return res.status(500).json({message: '服务器未配置文章数据库ID (NOTION_ARTICLE_DB_ID)。'});
+        return res.status(500).json({message: '服务器未配置文章数据库ID (NOTION_ARTICLE)。'});
     }
 
     try {
         // --- 请确保你的 Notion 文章数据库中包含以下列名 ---
-        const dateColumnName = 'Date';    // 发布日期列 (类型: Date)
-        const titleColumnName = 'Title';           // 标题列 (类型: Title)
-        const summaryColumnName = 'Summary';        // 摘要列 (类型: Rich Text)
+        const iDate = 'Date';    // 发布日期列 (类型: Date)
+        const iTitle = 'Title';           // 标题列 (类型: Title)
+        const iSummary = 'Summary';        // 摘要列 (类型: Rich Text)
         // ---------------------------------------------------
 
         // 第1步: 查询数据库，获取所有已发布的文章列表 (仅包含属性)
@@ -42,7 +43,7 @@ app.get('/article', async (req, res) => {
             database_id: articleDatabaseId,
             sorts: [
                 {
-                    property: dateColumnName,
+                    property: iDate,
                     direction: 'descending',
                 },
             ],
@@ -64,9 +65,9 @@ app.get('/article', async (req, res) => {
                 // 组合文章的属性和内容，构成一个完整的文章对象
                 return {
                     id: page.id,
-                    title: page.properties[titleColumnName]?.title[0]?.plain_text || '无标题',
-                    summary: page.properties[summaryColumnName]?.rich_text[0]?.plain_text || '',
-                    date: page.properties[dateColumnName]?.date?.start || '',
+                    title: page.properties[iTitle]?.title[0]?.plain_text || '无标题',
+                    summary: page.properties[iSummary]?.rich_text[0]?.plain_text || '',
+                    date: page.properties[iDate]?.date?.start || '',
                 };
             })
         );
@@ -125,15 +126,15 @@ app.get('/comments', async (req, res) => {
             }
 
             // --- 请再次确认这里的列名和你的Notion数据库完全一致 ---
-            const usernameColumnName = 'Username'; // 例如: '用户'
-            const contentColumnName = 'Content';   // 例如: '内容'
-            const dateColumnName = 'Date';         // 例如: '日期'
+            const cUsername = 'Username'; // 例如: '用户'
+            const cContent = 'Content';   // 例如: '内容'
+            const cDate = 'Date';         // 例如: '日期'
             // -----------------------------------------------------
 
             // 提取 title, rich_text 和 date 属性，同时进行健壮性检查
-            const titleArray = page.properties[usernameColumnName]?.title;
-            const richTextArray = page.properties[contentColumnName]?.rich_text;
-            const dateObject = page.properties[dateColumnName]?.date;
+            const titleArray = page.properties[cUsername]?.title;
+            const richTextArray = page.properties[cContent]?.rich_text;
+            const dateObject = page.properties[cDate]?.date;
 
             return {
                 id: page.id,
@@ -153,6 +154,8 @@ app.get('/comments', async (req, res) => {
         res.status(500).json({message: '获取评论失败。'});
     }
 });
+
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`服务器正在端口 ${port} 上运行`));
