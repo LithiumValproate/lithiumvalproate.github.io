@@ -4,4 +4,21 @@ body {
     background-attachment: fixed;
     background-size: cover;
     font-family: "Hiragino Sans GB", "Noto Sans CJK", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 添加一些简单的全局样式优化 */
+* {
+    box-sizing: border-box;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 改善链接的默认样式 */
+a {
+    transition: all 0.2s ease;
 }
