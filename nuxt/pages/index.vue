@@ -33,6 +33,13 @@
 
     <!-- 右侧栏保持不变 -->
     <div class="multi-column">
+      <div class="discord">
+        <iframe src="https://discord.com/widget?id=1367884898547011706&theme=dark"
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                width="100%" 
+                height="300">
+        </iframe>
+      </div>
       <div class="visitor-map">
         <!-- 访客地图内容 -->
         <p class="text-gray-500">访客地图</p>
@@ -236,10 +243,34 @@ const comments = computed(() => {
 }
 
 .multi-column {
+  margin-top: 1.5rem;
   width: 30%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: sticky;
+  top: 1.5rem;
+  align-self: flex-start;
+}
+
+.discord {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: #5865f2;
+  overflow: auto;
+}
+
+.discord iframe {
+  width: 100%;
+  min-height: 350px;
+  height: 100%;
+  border: none;
 }
 
 .visitor-map, .comment-board {

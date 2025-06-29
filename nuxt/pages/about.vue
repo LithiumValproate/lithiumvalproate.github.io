@@ -4,7 +4,7 @@
         class="avatar-ring-container"
         :style="{ width: containerSize + 'px', height: containerSize + 'px' }"
     >
-      <!-- 中间的圆形大头像 -->
+      <!-- 中间圆形大头像 -->
       <div class="center-avatar">
         <img
             src="~/public/avatar.png"
@@ -15,7 +15,7 @@
         >
       </div>
 
-      <!-- 循环生成周围的小图标 -->
+      <!-- 周围的小图标 -->
       <div
           v-for="(site, index) in siteList"
           :key="site.name"
