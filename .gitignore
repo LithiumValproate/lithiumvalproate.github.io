@@ -6,8 +6,20 @@
 .vscode/
 .fleet/
 
+# Nuxt project outputs
+nuxt/.output
+nuxt/.data
+nuxt/.nuxt
+nuxt/.nitro
+nuxt/.cache
+nuxt/dist
+
+# Node dependencies
+nuxt/node_modules
+
 # Logs
 *.log
+nuxt/logs
 
 # Environment files
 .env
